@@ -1,7 +1,18 @@
-h1	Temporary image hosting for Wii U screenshots
+html
+	head
+		style
+			include styles.css
+	body
+		h1 📷 Temporary image hosting for Wii U screenshots
 
-div
-	form(method='post', action='')
-		label(for='file_upload') Upload a screenshot:
-		input(id='file_upload', type='file')
-		input(type='submit')
+		div
+			| After uploading an image you'll get a link you can use to download it on another device.
+			
+
+		div
+			form(method='post', action='')
+				p
+					label(for='file_upload') Upload a screenshot: 
+					input(id='file_upload', type='file')
+				p
+					input(type='submit', value="Upload 📷")
