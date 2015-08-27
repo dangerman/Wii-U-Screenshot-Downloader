@@ -1,6 +1,9 @@
 var express = require('express');
 var jade = require('jade');
 var multer = require('multer');
+var qr = require('qr-image');
+var fs = require('fs');
+
 var storage = multer.diskStorage({
 		destination: function(req, file, cb) {
 			cb(null, './images/');
@@ -23,8 +26,15 @@ app.get('/', function(req, res) {
 
 app.post('/', upload.single('image'), function(req, res) {
 	var file = req.file;
+	console.log('File uploaded:');
 	console.log(file);
-	res.render('link', {file: file.filename})
+	var imageUrl = 'http://' + req.get('host') + '/' + file.filename;
+	
+	var qrCodeName = 'qr_'+file.filename;
+	var qrCode = qr.image(imageUrl, {type: 'png'});
+	qrCode.pipe(fs.createWriteStream('./images/'+qrCodeName));
+
+	res.render('link', {image: file.filename, qr: qrCodeName})
 });
 
 var server = app.listen(1234, function() {
