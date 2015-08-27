@@ -10,9 +10,9 @@ html
 			
 
 		div
-			form(method='post', action='')
+			form(method='post', action='', enctype='multipart/form-data')
 				p
 					label(for='file_upload') Upload a screenshot: 
-					input(id='file_upload', type='file')
+					input(id='file_upload', type='file', name='image') 
 				p
 					input(type='submit', value="Upload 📷")
