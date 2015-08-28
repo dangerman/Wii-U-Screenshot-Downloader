@@ -33,6 +33,20 @@ app.post('/', upload.single('image'), function(req, res) {
 	var qrCodeName = 'qr_'+file.filename;
 	var qrCode = qr.image(imageUrl, {type: 'png'});
 	qrCode.pipe(fs.createWriteStream('./images/'+qrCodeName));
+	
+	var removeImages = function() {
+		console.log('Deleting files for image: ' + file.filename);
+		fs.unlink(file.path, function(err) {
+			if (err) throw err;
+			console.log('Successfully deleted: ' + file.filename);
+		});
+		fs.unlink('images/'+qrCodeName, function(err) {
+			if (err) throw err;
+			console.log('Successfully deleted: ' + qrCodeName);
+		});
+	};
+	var fiveMinutesInMilliseconds = 300000;
+	setTimeout(removeImages, fiveMinutesInMilliseconds);
 
 	res.render('link', {image: file.filename, qr: qrCodeName})
 });
