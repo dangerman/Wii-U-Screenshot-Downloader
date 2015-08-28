@@ -53,14 +53,16 @@ app.post('/', upload.single('image'), function(req, res) {
 
 //404
 app.use(function(req, res, next) {
-	res.status(404).render('404');
+	res.status(404).render('error',
+		{message: 'Error 404 - Page not found >_<'});
 });
 
 //Handle other errors
 app.use(function(err, req, res, next) {
 	console.log("Error:");
 	console.error(err.stack);
-	res.status(500).render('error');
+	res.status(500).render('error',
+		{message: 'Error 500 - Something went wrong on the server >_<'});
 });
 
 var server = app.listen(1234, function() {
