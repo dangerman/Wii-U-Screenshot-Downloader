@@ -21,7 +21,13 @@ app.set('views', './views');
 app.use(express.static('images'));
 
 app.get('/', function(req, res) {
-	res.render('index');
+	var userAgent = req.get('user-agent');
+	if (userAgent.indexOf('Nintendo WiiU')>-1)
+		res.render('index');
+	else
+		res.status(400).render('error',
+			{message: 'Error 400 - Your browser is not supported >_< '+
+				'Please use the Wii U browser.'});
 });
 
 app.post('/', upload.single('image'), function(req, res) {
