@@ -9,7 +9,7 @@ var storage = multer.diskStorage({
 			cb(null, './images/');
 		},
 		filename: function(req, file, cb) {
-			cb(null, Date.now() + '.png');
+			cb(null, Date.now() + '.jpg');
 		}
 })
 var upload = multer({storage: storage});
@@ -35,6 +35,18 @@ app.post('/', upload.single('image'), function(req, res) {
 	qrCode.pipe(fs.createWriteStream('./images/'+qrCodeName));
 
 	res.render('link', {image: file.filename, qr: qrCodeName})
+});
+
+//404
+app.use(function(req, res, next) {
+	res.status(404).render('404');
+});
+
+//Handle other errors
+app.use(function(err, req, res, next) {
+	console.log("Error:");
+	console.error(err.stack);
+	res.status(500).render('error');
 });
 
 var server = app.listen(1234, function() {
