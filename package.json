@@ -4,7 +4,7 @@
   "description": "Temporary image hosting for Wii U screenshots",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "author": "",
   "license": "MIT",
@@ -13,5 +13,10 @@
     "jade": "~1.11.0",
     "multer": "~1.0.3",
     "qr-image": "~3.1.0"
+  },
+  "devDependencies": {
+    "chai": "~3.2.0",
+    "mocha": "~2.3.2",
+    "supertest": "~1.1.0"
   }
 }

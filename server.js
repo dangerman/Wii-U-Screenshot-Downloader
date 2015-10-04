@@ -71,6 +71,8 @@ app.use(function(err, req, res, next) {
 		{message: 'Error 500 - Something went wrong on the server >_<'});
 });
 
+module.exports = app;
+
 var server = app.listen(1234, function() {
 	console.log('Server listening at port 1234');
 });
