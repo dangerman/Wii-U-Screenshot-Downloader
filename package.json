@@ -4,7 +4,7 @@
   "description": "Temporary image hosting for Wii U screenshots",
   "main": "server.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha -R nyan"
   },
   "author": "",
   "license": "MIT",
